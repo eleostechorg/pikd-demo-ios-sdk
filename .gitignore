@@ -1,0 +1,9 @@
+[Cc]onfig/pikd.local.json
+PIKDDemo/DemoConfiguration.json
+Config/Local.xcconfig
+**/xcuserdata/
+.build/
+build/
+DerivedData/
+logs/
+.DS_Store

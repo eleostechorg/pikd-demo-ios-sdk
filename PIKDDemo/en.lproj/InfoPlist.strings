@@ -1,0 +1,2 @@
+"NSCameraUsageDescription" = "To display AR collectibles, PIKD needs access to your camera.";
+"NSLocationWhenInUseUsageDescription" = "Use your current location to discover and collect nearby AR items.";

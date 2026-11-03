@@ -1,0 +1,15 @@
+{
+  "appTitle": "Демонстрация iOS-опыта PIKD",
+  "welcomeTitle": "Добро пожаловать на интерактивный рождественский маршрут {{partner}}!",
+  "experienceDescription": "Исследуйте рождественскую иллюминацию и найдите все 14 артефактов, чтобы выиграть приз. Самого быстрого участника ждёт особый приз. Один приз на человека, но проходить маршрут можно сколько угодно раз.",
+  "nicknameLabel": "Никнейм (необязательно)",
+  "nicknamePlaceholder": "Введите никнейм",
+  "openPikd": "Открыть PIKD",
+  "configurationRequired": "Требуется настройка",
+  "configurationDescription": "Скопируйте config/pikd.example.json в config/pikd.local.json и укажите:",
+  "experienceUnavailable": "Опыт PIKD недоступен",
+  "singleActiveChallengeRequired": "PIKD можно открыть, когда для арендатора активен ровно один челлендж. Обратитесь в PIKD.",
+  "tryAgainLater": "PIKD сейчас не удаётся открыть. Повторите попытку позже.",
+  "close": "Закрыть",
+  "language": "Язык"
+}

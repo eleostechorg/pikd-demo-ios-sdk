@@ -1,0 +1,15 @@
+{
+  "appTitle": "PIKD iOS experience demo",
+  "welcomeTitle": "Welcome to {{partner}}'s Interactive Christmas Trail!",
+  "experienceDescription": "Explore the Christmas light displays and find all 14 artefacts to win a prize. The fastest to finish wins something extra special. One prize each, but run the trail as many times as you like.",
+  "nicknameLabel": "Nickname (optional)",
+  "nicknamePlaceholder": "Enter your nickname",
+  "openPikd": "Open PIKD",
+  "configurationRequired": "Configuration required",
+  "configurationDescription": "Copy config/pikd.example.json to config/pikd.local.json and provide:",
+  "experienceUnavailable": "PIKD experience unavailable",
+  "singleActiveChallengeRequired": "PIKD can open when this tenant has exactly one active challenge. Please contact PIKD.",
+  "tryAgainLater": "PIKD could not open right now. Please try again later.",
+  "close": "Close",
+  "language": "Language"
+}

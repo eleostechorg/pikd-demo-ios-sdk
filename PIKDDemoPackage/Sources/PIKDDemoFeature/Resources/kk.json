@@ -1,0 +1,15 @@
+{
+  "appTitle": "Демо iOS тәжірибесі PIKD",
+  "welcomeTitle": "{{partner}} интерактивті Рождество маршрутына қош келдіңіз!",
+  "experienceDescription": "Рождестволық жарықтарды тамашалап, жүлде ұтып алу үшін барлық 14 артефактті табыңыз. Ең жылдам қатысушыны ерекше жүлде күтеді. Әр адамға бір жүлде беріледі, ал маршрутты қалағаныңызша қайталауға болады.",
+  "nicknameLabel": "Лақап ат (міндетті емес)",
+  "nicknamePlaceholder": "Лақап атыңызды енгізіңіз",
+  "openPikd": "PIKD ашу",
+  "configurationRequired": "Конфигурация қажет",
+  "configurationDescription": "config/pikd.example.json файлын config/pikd.local.json ретінде көшіріп, мыналарды толтырыңыз:",
+  "experienceUnavailable": "PIKD тәжірибесі қолжетімсіз",
+  "singleActiveChallengeRequired": "PIKD қызметін жалға алушы үшін дәл бір белсенді челлендж болғанда ашуға болады. PIKD компаниясына хабарласыңыз.",
+  "tryAgainLater": "PIKD қазір ашылмады. Кейінірек қайталап көріңіз.",
+  "close": "Жабу",
+  "language": "Тіл"
+}
