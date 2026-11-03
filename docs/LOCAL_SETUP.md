@@ -90,17 +90,15 @@ Bundled font notices ship with the SDK. Register/license any additional font in 
 
 ## Tests and simulator use
 
-A simulator can exercise host navigation and fixture screens. Use a physical iPhone for camera placement, animation and live collection.
-
-For a fixture-only smoke test with no tenant values, prepare the blank example and run the selected host journey from Xcode's Test navigator:
+The public demo includes two host smoke tests: configuration guidance and English/Russian/Kazakh language selection. They use the blank example configuration and do not contact a tenant or open AR.
 
 ```sh
 python3 tools/prepare_config.py --source Config/pikd.example.json
 ```
 
-Select `DemoJourneyTests/testPartnerLaunchFiveTabsDashboardAndHostReturn` in the **PIKDDemo** scheme. It launches Debug-only sample content, opens PIKD and returns to the host without a live collection. Prepare your own local file again before live testing.
+In Xcode's Test navigator, run **HostSmokeTests** in the **PIKDDemo** scheme. Prepare your own local configuration again before running the live campaign.
 
-The optional `LiveDeviceTests` suite runs only when `PIKD_LIVE_DEVICE=1` is supplied in the test scheme with authorized live configuration. Leave it disabled for fixture tests. The SDK has a known AR dependency load issue on iOS 18.5 Simulator; use iOS 27 Simulator for screen development with this beta and a physical iPhone for AR.
+Use a physical iPhone to try campaign navigation, camera placement and live collection with your tenant configuration. This beta has a known AR dependency load issue on iOS 18.5 Simulator; use iOS 27 Simulator for host screen development.
 
 ## Troubleshooting
 

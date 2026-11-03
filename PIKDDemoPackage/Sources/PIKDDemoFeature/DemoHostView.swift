@@ -1,5 +1,4 @@
 import SwiftUI
-import GoogleMaps
 import PikdIOSCore
 import PikdIOSUI
 import PikdIOSAR
@@ -45,29 +44,13 @@ public struct DemoHostView: View {
                      blue: Double(rgb & 255) / 255, opacity: hex.count == 8 ? Double(value & 255) / 255 : 1)
     }
     public init() {
-        var values = DemoInputs.load()
-        #if DEBUG
-        if DemoFixtures.enabled {
-            values["PIKD_BASE"] = "https://example.invalid/sdk/v1"; values["PIKD_SDK_KEY"] = "fixture-key"; values["PIKD_USER"] = "fixture-host"
-            values["PIKD_LANGUAGE_REF"] = nil
-            values["PIKD_DEMO_COLLECT_RADIUS_M"] = "5"
-            values["PIKD_PARTNER_LABEL"] = "CDA"; values["PIKD_PARTNER_ITEM_BRAND"] = "CDA"; values["PIKD_PARTNER_APP_NAME"] = "CDA"
-            values["PIKD_FONT_FAMILY"] = nil; values["PIKD_THEME"] = nil
-            let args = ProcessInfo.processInfo.arguments
-            if let i = args.firstIndex(of: "--demo-locale"), args.indices.contains(i + 1) { values["PIKD_UI_LOCALE"] = args[i + 1] }
-        }
-        #endif
+        let values = DemoInputs.load()
         self.values = values
         _locale = State(initialValue: PIKDStrings.Locale(rawValue: values["PIKD_UI_LOCALE"] ?? "en") ?? .en)
         if let key = values["PIKD_GOOGLE_MAPS_KEY"], !key.isEmpty { PIKDMapServices.configure(apiKey: key) }
     }
     public var body: some View {
-        #if DEBUG
-        if ProcessInfo.processInfo.arguments.contains("--demo-components") { DemoComponentCatalogue() }
-        else { host }
-        #else
         host
-        #endif
     }
     private var host: some View {
         NavigationStack {
@@ -135,9 +118,6 @@ public struct DemoHostView: View {
                     collectRadiusMeters: Double(values["PIKD_DEMO_COLLECT_RADIUS_M"] ?? "5") ?? .nan, theme: theme)
                 config.email = values["PIKD_EMAIL"]; config.nickName = nickname
                 config.contentLanguageRef = values["PIKD_LANGUAGE_REF"]
-                #if DEBUG
-                if DemoFixtures.enabled { DemoFixtures.configure(&config) }
-                #endif
                 let value = try await PIKDCdaExperience.prepare(config)
                 guard !Task.isCancelled else { if case .ready(let c) = value { await c.client.invalidate() }; return }
                 launch = .init(value: value); opening = false
