@@ -1,22 +1,66 @@
-# PIKD iOS partner host demo
+# PIKD iOS demo
 
-A standalone example of a partner launching `PikdIOSPartnerExperience` from an existing app and returning to its host screen. It demonstrates the CDA facade over the generic Core, UI, AR and Experience products.
+A native SwiftUI example of adding PIKD to an existing iOS app. Launch a branded campaign from your app, explore its map, collect objects in AR, view your collection and follow the leaderboard. This demo uses the CDA partner experience.
 
-## Setup
+The app installs compiled SDK **0.8.0-beta.15** through Swift Package Manager. You need PIKD tenant access and a Google Maps SDK for iOS key to use live content.
 
-1. Obtain access to the exact SDK release referenced by `PIKDDemoPackage/Package.swift`. Commercial SDK access/distribution is supplied separately; this public demo does not redistribute the SDK implementation.
-2. Copy `Config/pikd.example.json` to the ignored `Config/pikd.local.json`. Set your `/sdk/v1` URL, SDK key and host user reference. Supply a Google Maps key valid for your bundle identifier. CDA needs one active challenge.
-3. Run `python3 tools/prepare_config.py` before the first build.
-4. Open `PIKDDemo.xcworkspace`, choose **PIKDDemo**, configure your own bundle identifier/signing team and run on an AR-capable iPhone. Optional local signing overrides belong in ignored `Config/Local.xcconfig`.
+## Get started
 
-English, Russian and Kazakh are built in. The host picker controls UI language; optional `PIKD_LANGUAGE_REF` controls backend content language independently. Optional branding, email/nickname, font/theme and collection-radius inputs follow `Config/pikd.example.json` and the host source. Default branding is CDA and default collection radius is5m.
+1. Install Xcode 27.1 with Swift 6.4, its iOS platform support, and Python 3. Use an ARKit-capable physical iPhone for camera collection.
+2. Clone and configure the app:
 
-The host's **Open PIKD** button performs partner preparation and presents the package. Closing PIKD restores the host. SDK screens and business/session orchestration live in the SDK packages, not duplicate host implementations.
+   ```sh
+   git clone https://github.com/eleostechorg/pikd-demo-ios-sdk.git
+   cd pikd-demo-ios-sdk
+   cp Config/pikd.example.json Config/pikd.local.json
+   cp Config/Local.xcconfig.example Config/Local.xcconfig
+   ```
 
-Explore markers open a details card. Go selects navigation; Collect opens AR collection directly. Collection results refresh the appropriate SDK data. Owned-item View in AR is preview only. The demo includes original loading radar/firework and result assets through SDK resources.
+3. Edit `Config/pikd.local.json`:
 
-Camera/location permission descriptions follow the iOS app language; SDK/host controls follow the selected UI locale. Generated configuration is bundled for Debug and Release, but populated local input and generated files stay untracked. Never commit a developer's tenant values, Maps key or signing configuration.
+   | Setting | Your value |
+   |---|---|
+   | `PIKD_BASE` | SDK v1 base URL supplied by PIKD, including `/sdk/v1` |
+   | `PIKD_SDK_KEY` | Your tenant's SDK key |
+   | `PIKD_USER` | Stable identifier for the signed-in user in your app |
+   | `PIKD_GOOGLE_MAPS_KEY` | Maps SDK for iOS key restricted to your app's bundle identifier |
 
-The exported Xcode tests use public SDK APIs and explicit Debug-only fixtures without tenant writes or a camera. `--demo-components` opens a secondary component catalogue; normal launch remains the partner host journey. SDK-internal native-session tests and the external RN comparison harness are not exported. A simulator cannot establish real camera placement or live collection correctness.
+4. Edit `Config/Local.xcconfig` with your Apple development team and a unique bundle identifier. Restrict the Maps key to that same identifier.
+5. Prepare configuration and open the workspace:
 
-This repository is an export of a reviewed host demo. Do not copy SDK source into it. Dependencies must resolve independently at the selected exact release. See `LICENSE` for commercial terms and the SDK's third-party notices for bundled fonts/icons/animation runtime.
+   ```sh
+   python3 tools/prepare_config.py
+   open PIKDDemo.xcworkspace
+   ```
+
+6. In Xcode, select **PIKDDemo**, choose your connected iPhone, confirm its signing team, and run. Xcode resolves the SDK packages automatically. Choose a language and tap **Open PIKD**.
+
+Your tenant must have exactly one active, named challenge for this CDA launch flow. PIKD supplies your tenant access and campaign configuration.
+
+For device pairing, signing, language/branding options and troubleshooting, see [Local setup](docs/LOCAL_SETUP.md). The demo uses SwiftPM; Node, Flutter and CocoaPods are not required to run this app.
+
+## Add PIKD to your own app
+
+Follow [Integrating into an existing app](docs/INTEGRATING_INTO_EXISTING_APP.md) for product selection, SwiftPM/CocoaPods installation, Maps, permissions, SwiftUI and UIKit presentation, account identity and cleanup.
+
+Your app keeps its own navigation and login. It supplies the current user and opens PIKD from a button or route; closing PIKD returns to your app. See [DemoHostView.swift](PIKDDemoPackage/Sources/PIKDDemoFeature/DemoHostView.swift) for the launch/configuration example and [SDK documentation](https://github.com/eleostechorg/pikd-ios-sdk-distribution) for installation.
+
+## Try the experience
+
+- **Map:** find campaign objects; select a marker for Go or Collect.
+- **Info:** read campaign details and instructions.
+- **AR:** use the camera to view and collect nearby objects.
+- **Leaderboard:** see campaign rankings and trail statistics.
+- **Profile:** switch between Dashboard and Collectibles; preview an owned item with View in AR.
+
+English, Russian and Kazakh are included. Collection uses the device location and your campaign's eligibility/range rules. Search near locations configured for your tenant.
+
+## Configuration and development
+
+Local tenant values, generated configuration and signing overrides are ignored by Git. Run `python3 tools/prepare_config.py` again after changing local JSON. See [configuration and branding](docs/LOCAL_SETUP.md#configuration-and-branding) and [tests](docs/LOCAL_SETUP.md#tests-and-simulator-use).
+
+## License and support
+
+PIKD SDK use requires a written agreement with ELEOS WORLD LTD. See [LICENSE](LICENSE) and preserve the SDK's third-party notices.
+
+Contact your PIKD representative for tenant access. Report reproducible demo issues through [GitHub Issues](https://github.com/eleostechorg/pikd-demo-ios-sdk/issues), with tool versions and steps to reproduce; remove credentials and personal data from attachments.
